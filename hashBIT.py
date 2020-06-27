@@ -259,7 +259,7 @@ def removeTempImages():
 
     # Clear the rate cache
     requests_cache.clear()
-    # print ("Rate cache was cleared.")
+     print ("Rate cache was cleared.")
 
     # Remove temp folder graph images
     for file in files:
@@ -295,9 +295,9 @@ def saveGraphImage(coin: str):
 
         # TODO:
         # Get the image of the coin to put on the graph
-        # coinImage = coinData['BaseImageUrl'] + coinData['Data'][coin]['ImageUrl']
-        # response = requests.get(coinImage)
-        # coinImage = Image.open(BytesIO(response.content))
+         coinImage = coinData['BaseImageUrl'] + coinData['Data'][coin]['ImageUrl']
+         response = requests.get(coinImage)
+         coinImage = Image.open(BytesIO(response.content))
 
         # Graph settings
         coinHistoryEUR = dailyPrice(coin, 'EUR')
@@ -362,10 +362,10 @@ async def graph(ctx, coin: str):
                 # If self hosting, feel free to uncomment the following block
                 # so you will get notified via PM if something is wrong with the graph system:
 
-                # await bot.send_message(ctx.message.channel,"There was an error with getting the graph image, this is a server configuration issue and the server owner has been notified.")
-                # await bot.send_message(ctx.message.server.owner, "Hey! There has been an error with a request for a {} graph image from a user of your server. Please be sure to check the `temp` directory exists in the script root and is readable and writable to the user running the bot script. The error is as follows: ***{}*".format(coin, e))
-                # await bot.send_message(ctx.message.server.owner, "The script automatically generates and downloads images from the temp folder if an image for the chosen coin does not already exist, it then keeps it for 12 hours before removing it from the server.")
-                # await bot.send_message(ctx.message.server.owner, "If you are having trouble, feel free to ask for help over on https://github.com/fuzzymannerz/hashBIT or message Discord user **fuzzy#8620**")
+                 await bot.send_message(ctx.message.channel,"There was an error with getting the graph image, this is a server configuration issue and the server owner has been notified.")
+                 await bot.send_message(ctx.message.server.owner, "Hey! There has been an error with a request for a {} graph image from a user of your server. Please be sure to check the `temp` directory exists in the script root and is readable and writable to the user running the bot script. The error is as follows: ***{}*".format(coin, e))
+                 await bot.send_message(ctx.message.server.owner, "The script automatically generates and downloads images from the temp folder if an image for the chosen coin does not already exist, it then keeps it for 12 hours before removing it from the server.")
+                 await bot.send_message(ctx.message.server.owner, "If you are having trouble, feel free to ask for help over on https://github.com/fuzzymannerz/hashBIT or message Discord user **fuzzy#8620**")
 
     except Exception as e:
         await rateError()
